@@ -1,3 +1,4 @@
+import { Header } from '@/components/Header';
 import { Outlet } from 'react-router-dom';
 
 export const AuthLayout = () => {
@@ -5,6 +6,7 @@ export const AuthLayout = () => {
     <div>
       <h1>Auth Layout</h1>
       <p>This is the Auth Layout page.</p>
+      <Header />
       <Outlet />
     </div>
   );

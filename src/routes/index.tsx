@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Top, About, Login, Register, NotFound } from '@/pages';
+import { Top, About, Login, Register, NotFound, Post } from '@/pages';
 import { MainLayout, AuthLayout } from '@/layouts';
 
 export const AppRoutes = () => {
@@ -9,6 +9,7 @@ export const AppRoutes = () => {
         <Route element={<MainLayout />}>
           <Route index element={<Top />} />
           <Route path="/about" element={<About />} />
+          <Route path="/post/:postId" element={<Post />} />
           <Route path="*" element={<NotFound />} />
         </Route>
         <Route element={<AuthLayout />}>
