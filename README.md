@@ -1,50 +1,46 @@
-# React + TypeScript + Vite
+# template-sinatra
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+このリポジトリはReactのテンプレートプロジェクトです。
+このプロジェクトは、[Dev Container](https://code.visualstudio.com/docs/devcontainers/containers)での利用を想定した構成になっています。
 
-Currently, two official plugins are available:
+## ディレクトリ構成
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
+```bash
+tree -I 'vendor|node_modules'
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## 開発環境構築
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react';
+## 必要なツール
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-});
-```
+- [VS Code](https://code.visualstudio.com/)
+- [Docker](https://www.docker.com/ja-jp/)
+- VS Codeの[Dev Containers拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+
+### 開発環境の準備
+
+1. リポジトリをクローン
+
+   ```bash
+   git clone git@github.com:yuuu-takahashi/template-react.git
+   cd template-react
+   ```
+
+3. VS Codeのの左下「><」アイコンをクリックし、「Remote-Containers: Reopen in Container」を選択し、起動
+
+4. データベース準備
+
+   ```bash
+   bundle exec rake db:setup
+   bundle exec rake db:seed
+   ```
+
+5. 開発サーバー起動
+
+   ```bash
+   bundle exec ruby index.rb
+   ```
+
+ブラウザで <http://localhost:4567> を開き、表示確認
+
+## 開発作業ガイド
