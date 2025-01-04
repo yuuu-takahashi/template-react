@@ -31,10 +31,10 @@ export const Header = () => {
           {List.map((item) => (
             <li key={item.id}>
               <NavLink
-                to={item.to}
                 style={({ isActive }) => ({
                   color: isActive ? 'red' : 'blue',
                 })}
+                to={item.to}
               >
                 {item.name}
               </NavLink>

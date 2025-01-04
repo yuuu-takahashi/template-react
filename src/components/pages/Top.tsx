@@ -1,13 +1,12 @@
 import { logo } from '@/assets';
-
-import { UIImage } from '../ui/UIImage';
+import { UIImage } from '@/components/ui/UIImage';
 
 export const Top = () => {
   return (
     <div>
       <h1>Top</h1>
       <p>This is the top page.</p>
-      <UIImage src={logo} alt="" width={100} height={100} isEager />
+      <UIImage isEager alt="" height={100} src={logo} width={100} />
     </div>
   );
 };

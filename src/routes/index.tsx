@@ -16,13 +16,13 @@ export const AppRoutes = () => {
       <Routes>
         <Route element={<MainLayout />}>
           <Route index element={<Top />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/post/:postId" element={<Post />} />
-          <Route path="*" element={<NotFound />} />
+          <Route element={<About />} path="/about" />
+          <Route element={<Post />} path="/post/:postId" />
+          <Route element={<NotFound />} path="*" />
         </Route>
         <Route element={<AuthLayout />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route element={<Login />} path="/login" />
+          <Route element={<Register />} path="/register" />
         </Route>
       </Routes>
     </BrowserRouter>

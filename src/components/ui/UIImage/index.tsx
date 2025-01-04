@@ -15,11 +15,11 @@ export const UIImage = ({
 }: Props) => {
   return (
     <img
-      src={src}
       alt={alt}
-      width={width}
       height={height}
       loading={isEager ? 'eager' : 'lazy'}
+      src={src}
+      width={width}
     />
   );
 };
