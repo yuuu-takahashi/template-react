@@ -1,21 +1,50 @@
-# template-nodejs
+# React + TypeScript + Vite
 
-このリポジトリはNode.jsのテンプレートプロジェクトです。
-このプロジェクトは、[Dev Container](https://code.visualstudio.com/docs/devcontainers/containers)での利用を想定した構成になっています。
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## 必要なツール
+Currently, two official plugins are available:
 
-- [VS Code](https://code.visualstudio.com/)
-- [Docker](https://www.docker.com/ja-jp/)
-- VS Codeの[Dev Containers拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## 開発環境の準備
+## Expanding the ESLint configuration
 
-1. リポジトリをクローン
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-   ```bash
-   git clone git@github.com:yuuu-takahashi/template-nodejs.git
-   cd template-nodejs
-   ```
+- Configure the top-level `parserOptions` property like this:
 
-2. VS Codeのの左下「><」アイコンをクリックし、「Remote-Containers: Reopen in Container」を選択し、起動
+```js
+export default tseslint.config({
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
+```
+
+- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
+- Optionally add `...tseslint.configs.stylisticTypeChecked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+
+```js
+// eslint.config.js
+import react from 'eslint-plugin-react'
+
+export default tseslint.config({
+  // Set the react version
+  settings: { react: { version: '18.3' } },
+  plugins: {
+    // Add the react plugin
+    react,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended rules
+    ...react.configs.recommended.rules,
+    ...react.configs['jsx-runtime'].rules,
+  },
+})
+```
