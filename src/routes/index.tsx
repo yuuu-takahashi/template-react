@@ -1,4 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import { MainLayout, AuthLayout } from '@/components/layouts';
 import {
   Top,
   About,
@@ -7,7 +9,6 @@ import {
   NotFound,
   Post,
 } from '@/components/pages';
-import { MainLayout, AuthLayout } from '@/components/layouts';
 
 export const AppRoutes = () => {
   return (

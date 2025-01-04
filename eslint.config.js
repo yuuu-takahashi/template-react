@@ -26,10 +26,31 @@ export default tseslint.config(
         { allowConstantExport: true },
       ],
       ...importPlugin.configs.recommended.rules,
+      'import/order': [
+        'error',
+        {
+          groups: [
+            'builtin',
+            'external',
+            'internal',
+            ['parent', 'sibling', 'index'],
+            'object',
+            'type',
+          ],
+          'newlines-between': 'always',
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: true,
+          },
+        },
+      ],
+      'import/newline-after-import': ['error', { count: 1 }],
     },
-    'import/resolver': {
-      typescript: {
-        project: './tsconfig.json',
+    settings: {
+      'import/resolver': {
+        typescript: {
+          project: './tsconfig.json',
+        },
       },
     },
   }
