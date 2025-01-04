@@ -3,7 +3,7 @@ interface Props {
   alt: string;
   width: number;
   height: number;
-  isLazy?: 'lazy' | 'eager';
+  isEager?: boolean;
 }
 
 export const UIImage = ({
@@ -11,9 +11,15 @@ export const UIImage = ({
   width,
   height,
   src,
-  isLazy = 'eager',
+  isEager = false,
 }: Props) => {
   return (
-    <img src={src} alt={alt} width={width} height={height} loading={isLazy} />
+    <img
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      loading={isEager ? 'eager' : 'lazy'}
+    />
   );
 };
