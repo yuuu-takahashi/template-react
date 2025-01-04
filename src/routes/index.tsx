@@ -1,6 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Top, About, Login, Register, NotFound, Post } from '@/pages';
-import { MainLayout, AuthLayout } from '@/layouts';
+import {
+  Top,
+  About,
+  Login,
+  Register,
+  NotFound,
+  Post,
+} from '@/components/pages';
+import { MainLayout, AuthLayout } from '@/components/layouts';
 
 export const AppRoutes = () => {
   return (
