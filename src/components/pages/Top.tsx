@@ -1,5 +1,5 @@
 import { logo } from '@/assets';
-import { Image } from '@/components/ui/Image';
+import { Image } from '@/components/common/Image';
 
 export const Top = () => {
   return (
