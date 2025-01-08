@@ -16,18 +16,15 @@ export default tseslint.config(
       globals: globals.browser,
     },
     plugins: {
+      import: importPlugin,
       react: react,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
-      import: importPlugin,
     },
     rules: {
-      ...reactHooks.configs.recommended.rules,
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
       ...importPlugin.configs.recommended.rules,
+      ...reactHooks.configs.recommended.rules,
+      'import/newline-after-import': ['error', { count: 1 }],
       'import/order': [
         'error',
         {
@@ -47,6 +44,17 @@ export default tseslint.config(
         },
       ],
       'import/newline-after-import': ['error', { count: 1 }],
+      'import/no-restricted-paths': [
+        'error',
+        {
+          zones: [
+            {
+              target: './src/components/elements',
+              from: 'node_modules',
+            },
+          ],
+        },
+      ],
       'react/self-closing-comp': [
         'error',
         {
