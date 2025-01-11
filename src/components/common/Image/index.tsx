@@ -6,13 +6,7 @@ interface Props {
   isEager?: boolean;
 }
 
-export const UIImage = ({
-  alt,
-  width,
-  height,
-  src,
-  isEager = false,
-}: Props) => {
+export const Image = ({ alt, width, height, src, isEager = false }: Props) => {
   return (
     <img
       alt={alt}
