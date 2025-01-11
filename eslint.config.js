@@ -23,6 +23,12 @@ const config = {
   rules: {
     ...importPlugin.configs.recommended.rules,
     ...reactHooks.configs.recommended.rules,
+    'no-restricted-imports': [
+      'error',
+      {
+        patterns: ['../*', './*', '.'],
+      },
+    ],
     'import/newline-after-import': ['error', { count: 1 }],
     'import/order': [
       'error',
