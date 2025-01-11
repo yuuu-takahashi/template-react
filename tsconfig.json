@@ -9,6 +9,7 @@
     "paths": {
       "@/*": ["*"]
     },
+    "esModuleInterop": true,
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -25,5 +26,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"]
+  "include": ["src", "**/*.config.ts", "**/*.setup.ts"]
 }
