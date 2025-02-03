@@ -80,7 +80,7 @@ const config = {
   settings: {
     'import/resolver': {
       typescript: {
-        project: './tsconfig.json',
+        project: './tsconfig.app.json',
       },
     },
   },
