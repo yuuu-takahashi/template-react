@@ -1,69 +1,58 @@
 import js from '@eslint/js';
-import globals from 'globals';
+import eslintConfigPrettier from 'eslint-config-prettier';
+import reactPlugin from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
+import unusedImports from 'eslint-plugin-unused-imports';
 import tseslint from 'typescript-eslint';
 import importPlugin from 'eslint-plugin-import';
-import react from 'eslint-plugin-react';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
 
 export default tseslint.config(
-  { ignores: ['dist'] },
   {
-    extends: [js.configs.recommended, ...tseslint.configs.recommended],
-    files: ['**/*.{ts,tsx}'],
+    extends: [
+      js.configs.recommended,
+      ...tseslint.configs.recommended,
+      importPlugin.flatConfigs.recommended,
+      reactPlugin.configs.flat.recommended,
+      jsxA11y.flatConfigs.recommended,
+      eslintConfigPrettier,
+    ],
+    files: ['**/*.{ts,tsx,js,jsx}'],
     languageOptions: {
       ecmaVersion: 2020,
-      globals: globals.browser,
+      globals: {
+        browser: true,
+      },
     },
     plugins: {
-      react: react,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
-      import: importPlugin,
+      'unused-imports': unusedImports,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: ['../*', './*'],
+        },
+      ],
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
       ],
-      ...importPlugin.configs.recommended.rules,
-      'import/order': [
-        'error',
-        {
-          groups: [
-            'builtin',
-            'external',
-            'internal',
-            ['parent', 'sibling', 'index'],
-            'object',
-            'type',
-          ],
-          'newlines-between': 'always',
-          alphabetize: {
-            order: 'asc',
-            caseInsensitive: true,
-          },
-        },
-      ],
-      'import/newline-after-import': ['error', { count: 1 }],
+      'react/jsx-boolean-value': ['error', 'never'],
+      'react/jsx-curly-brace-presence': 'error',
+      'react/react-in-jsx-scope': 'off',
       'react/self-closing-comp': [
         'error',
         {
           component: true,
-          html: false,
+          html: true,
         },
       ],
-      'react/jsx-sort-props': [
-        'error',
-        {
-          callbacksLast: true,
-          shorthandFirst: true,
-          noSortAlphabetically: false,
-          reservedFirst: true,
-        },
-      ],
-      'react/jsx-boolean-value': ['error', 'never'],
+      'unused-imports/no-unused-imports': 'error',
     },
     settings: {
       'import/resolver': {
@@ -71,6 +60,10 @@ export default tseslint.config(
           project: './tsconfig.app.json',
         },
       },
+      react: {
+        version: 'detect',
+      },
     },
-  }
+  },
+  { ignores: ['dist'] }
 );
