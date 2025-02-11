@@ -1,45 +1,68 @@
 import js from '@eslint/js';
-import globals from 'globals';
-import react from 'eslint-plugin-react';
+import eslintConfigPrettier from 'eslint-config-prettier';
+import reactPlugin from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
+import unusedImports from 'eslint-plugin-unused-imports';
 import tseslint from 'typescript-eslint';
 import importPlugin from 'eslint-plugin-import';
-import unusedImports from 'eslint-plugin-unused-imports';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
-import prettier from 'eslint-config-prettier';
 
 export default tseslint.config(
   {
     extends: [
       js.configs.recommended,
       ...tseslint.configs.recommended,
-      'plugin:react/recommended',
-      'plugin:import/recommended',
-      'plugin:jsx-a11y/recommended',
-      'prettier',
+      importPlugin.flatConfigs.recommended,
+      reactPlugin.configs.flat.recommended,
+      jsxA11y.flatConfigs.recommended,
+      eslintConfigPrettier,
     ],
-    files: ['**/*.{ts,tsx}'],
+    files: ['**/*.{ts,tsx,js,jsx}'],
     languageOptions: {
       ecmaVersion: 2020,
-      globals: globals.browser,
+      globals: {
+        browser: true,
+      },
     },
     plugins: {
-      react,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
-      import: importPlugin,
       'unused-imports': unusedImports,
-      'jsx-a11y': jsxA11y,
-      prettier,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      'unused-imports/no-unused-imports': 'error',
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: ['../*', './*'],
+        },
+      ],
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
       ],
+      'react/jsx-boolean-value': ['error', 'never'],
+      'react/jsx-curly-brace-presence': 'error',
+      'react/react-in-jsx-scope': 'off',
+      'react/self-closing-comp': [
+        'error',
+        {
+          component: true,
+          html: true,
+        },
+      ],
+      'unused-imports/no-unused-imports': 'error',
+    },
+    settings: {
+      'import/resolver': {
+        typescript: {
+          project: './tsconfig.app.json',
+        },
+      },
+      react: {
+        version: 'detect',
+      },
     },
   },
   { ignores: ['dist'] }
